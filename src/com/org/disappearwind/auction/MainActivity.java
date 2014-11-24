@@ -18,7 +18,7 @@ public class MainActivity extends Activity implements OnClickListener {
 	// 定义Tab内的Fragment
 	ItemListFragment hotItemListFragment;
 	ItemListFragment lostItemListFragment;
-	ItemListFragment userItemListFragment;
+	UserFragment userFragment;
 	KindFragment kindFragment;
 
 	// 定义底部Tab工具栏的元素
@@ -132,12 +132,12 @@ public class MainActivity extends Activity implements OnClickListener {
 			tab4Text.setTextColor(getResources().getColor(
 					R.color.tab_text_selected));
 			tab4Image.setImageResource(R.drawable.tab4_selected);
-			if (userItemListFragment == null) {
-				userItemListFragment = ItemListFragment.newInstance(
-						ItemListFragment.ITEM_LIST_TYPE.User.toString(), "");
-				transaction.add(R.id.content, userItemListFragment, "tab4");
+			if (userFragment == null) {
+				userFragment = UserFragment.newInstance();
+				transaction.add(R.id.content, userFragment, "tab4");
 			} else {
-				transaction.show(userItemListFragment);
+				transaction
+				.show(getFragmentManager().findFragmentByTag("tab4"));
 			}
 			break;
 		}

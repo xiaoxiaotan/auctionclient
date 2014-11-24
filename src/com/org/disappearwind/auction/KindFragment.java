@@ -27,7 +27,6 @@ import android.widget.EditText;
 import android.widget.ListView;
 
 public class KindFragment extends ListFragment {
-	Button btnAdd;
 	KindArrayAdapter listAdapter;
 
 	// 盛放本KindFragment的容器ID，用与打开ItemListFragment
@@ -61,17 +60,6 @@ public class KindFragment extends ListFragment {
 		if (container != null) {
 			containerId = container.getId();
 		}
-		btnAdd = (Button) rootView.findViewById(R.id.btnAdd);
-
-		btnAdd.setOnClickListener(new OnClickListener() {
-			@Override
-			public void onClick(View source) {
-				// 打开添加分类的窗体
-				//ShowAddKindView(source.getContext());
-				LogUtil.addLog("Test","SQLiteDatabase");
-			}
-		});
-
 		JSONArray itemArray = GetListData();
 		listAdapter = new KindArrayAdapter(itemArray, this.getActivity());
 		setListAdapter(listAdapter);
@@ -113,71 +101,5 @@ public class KindFragment extends ListFragment {
 			LogUtil.addErrorLog("KindFragment.GetListData", e);
 		}
 		return itemList;
-	}
-
-	/*
-	 * 添加分类的窗体
-	 */
-	private void ShowAddKindView(Context ctx) {
-		// 采用弹出形式
-		final AlertDialog.Builder addKindBuilder = new AlertDialog.Builder(ctx);
-		addKindBuilder.setTitle(R.string.add_kind);
-		// 从XML中加载界面
-		LayoutInflater inflater = LayoutInflater.from(ctx);
-		final View addKindView = inflater.inflate(R.layout.fragment_kind_add,
-				null);
-		addKindBuilder.setView(addKindView);
-		// 添加按钮
-		addKindBuilder.setPositiveButton("添加",
-				new DialogInterface.OnClickListener() {
-					@Override
-					public void onClick(DialogInterface dialog, int which) {
-						String kindName = ((EditText) addKindView
-								.findViewById(R.id.txtKindName)).getText()
-								.toString();
-						String kindDesc = ((EditText) addKindView
-								.findViewById(R.id.txtKindDesc)).getText()
-								.toString();
-						if (validateKind(addKindBuilder.getContext(), kindName,
-								kindDesc)) {
-							addKind(kindName, kindDesc);
-							onCreate(null);
-						}
-					}
-				});
-		addKindBuilder.setNegativeButton("取消", null);
-		addKindBuilder.show();
-	}
-
-	/*
-	 * 验证用户输入的分类信息
-	 */
-	private boolean validateKind(Context ctx, String kindName, String kindDesc) {
-		if (kindName.equals("")) {
-			DialogUtil.showDialog(ctx, "名称不能为空！");
-			return false;
-		}
-		if (kindDesc.equals("")) {
-			DialogUtil.showDialog(ctx, "描述不能为空！");
-			return false;
-		}
-		return true;
-	}
-
-	/*
-	 * 调用服务端添加分类
-	 */
-	private void addKind(String kindName, String kindDesc) {
-		JSONObject json;
-		try {
-			Map<String, String> params = new HashMap<String, String>();
-			params.put("name", kindName);
-			params.put("desc", kindDesc);
-
-			String result = HttpUtil.postRequest(HttpUtil.URL_KIND_ADD, params);
-		} catch (Exception e) {
-			DialogUtil.showDialog(getActivity(), "服务器响应异常，请稍后再试！");
-			Log.e("KindFragment.AddKind", e.getMessage());
-		}
 	}
 }

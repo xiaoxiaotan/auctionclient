@@ -35,14 +35,13 @@ public class ItemListFragment extends ListFragment {
 	 * 列表的类型，如取最热门、分类下的、用户的等等
 	 */
 	public static enum ITEM_LIST_TYPE {
-		LOST,
-		KIND,
-		HOT,
-		User,
+		LOST, KIND, HOT, USER,
 	}
 
 	private static final String LIST_TYPE = "LIST_TYPE";
 	private static final String LIST_PARAM = "LIST_PARAM";
+
+	public static boolean AllowBid = true;
 
 	private String mListType;
 	private String mListParam;
@@ -95,16 +94,20 @@ public class ItemListFragment extends ListFragment {
 	@Override
 	public void onListItemClick(ListView l, View v, int position, long id) {
 		super.onListItemClick(l, v, position, id);
-		try {
-			JSONObject selectedItem = (JSONObject) l.getAdapter().getItem(
-					position);
-			String itemID = selectedItem.getString("ID");
-			String item = selectedItem.toString();
-			ItemDetailFragment bidFragment = ItemDetailFragment.newInstance(itemID, item);
-			FragmentTransaction fTran = getFragmentManager().beginTransaction();
-			bidFragment.show(fTran, "tt");
-		} catch (Exception e) {
-			Log.e("KindActivity.onListItemClick", e.getMessage());
+		if (AllowBid) {
+			try {
+				JSONObject selectedItem = (JSONObject) l.getAdapter().getItem(
+						position);
+				String itemID = selectedItem.getString("ID");
+				String item = selectedItem.toString();
+				ItemDetailFragment bidFragment = ItemDetailFragment
+						.newInstance(itemID, item);
+				FragmentTransaction fTran = getFragmentManager()
+						.beginTransaction();
+				bidFragment.show(fTran, "tt");
+			} catch (Exception e) {
+				Log.e("KindActivity.onListItemClick", e.getMessage());
+			}
 		}
 	}
 
@@ -129,7 +132,7 @@ public class ItemListFragment extends ListFragment {
 			case HOT:
 				url = HttpUtil.URL_LIST_ITEM_HOT;
 				break;
-			case User:
+			case USER:
 				url = HttpUtil.URL_LIST_ITEM_USER;
 				break;
 			}

@@ -1,0 +1,11 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <string-array name="userMenu">
+        <item>添加分类</item>
+        <item>添加物品</item>
+        <item>查看自己的物品</item>
+        <item>查看参与竞拍的物品</item>
+        <item>查看竞得的物品</item>
+         <item>关于</item>
+    </string-array>
+</resources>
