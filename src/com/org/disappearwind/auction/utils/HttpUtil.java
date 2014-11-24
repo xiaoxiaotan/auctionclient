@@ -147,6 +147,8 @@ public class HttpUtil {
 	private static Map<String,String> addCommonParams(Map<String,String> params){
 		//uid
 		params.put("uid",SharedPrefUtil.getPref(SharedPrefUtil.USER_ID));
+		//设备信息
+		params.put("device", DeviceUtil.getDeviceInfo());
 		return params;
 	}
 }

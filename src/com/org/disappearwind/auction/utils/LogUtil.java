@@ -3,6 +3,9 @@
  */
 package com.org.disappearwind.auction.utils;
 
+import java.util.HashMap;
+import java.util.Map;
+
 import android.util.Log;
 
 
@@ -17,6 +20,10 @@ public class LogUtil {
 	 */
 	public static void addLog(String source,String msg)
 	{
+		Map<String,String> params = new HashMap<String,String>();
+		params.put(SQLiteUtil.SQL_LOG_CLOUMN_SOURCE, source);
+		params.put(SQLiteUtil.SQL_LOG_CLOUMN_MESSAGE, msg);
+		SQLiteUtil.insertLog(params);
 		Log.e(source,msg);
 	}
 	/*
