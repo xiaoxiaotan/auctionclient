@@ -66,12 +66,12 @@ public class MainActivity extends Activity implements OnClickListener {
 		tab2Layout = findViewById(R.id.tab2);
 		tab2Layout.setOnClickListener(this);
 		tab2Text = (TextView) findViewById(R.id.tab2_text);
-		tab3Image = (ImageView) findViewById(R.id.tab2_image);
+		tab2Image = (ImageView) findViewById(R.id.tab2_image);
 
 		tab3Layout = findViewById(R.id.tab3);
 		tab3Layout.setOnClickListener(this);
 		tab3Text = (TextView) findViewById(R.id.tab3_text);
-		tab4Image = (ImageView) findViewById(R.id.tab3_image);
+		tab3Image = (ImageView) findViewById(R.id.tab3_image);
 
 		tab4Layout = findViewById(R.id.tab4);
 		tab4Layout.setOnClickListener(this);
@@ -93,6 +93,7 @@ public class MainActivity extends Activity implements OnClickListener {
 		case 1:
 			tab1Text.setTextColor(getResources().getColor(
 					R.color.tab_text_selected));
+			tab1Image.setImageResource(R.drawable.tab1_selected);
 
 			if (kindFragment == null) {
 				kindFragment = KindFragment.newInstance();
@@ -106,6 +107,7 @@ public class MainActivity extends Activity implements OnClickListener {
 		case 2:
 			tab2Text.setTextColor(getResources().getColor(
 					R.color.tab_text_selected));
+			tab2Image.setImageResource(R.drawable.tab2_selected);
 			if (hotItemListFragment == null) {
 				hotItemListFragment = ItemListFragment.newInstance(
 						ItemListFragment.ITEM_LIST_TYPE.HOT.toString(), "");
@@ -117,6 +119,7 @@ public class MainActivity extends Activity implements OnClickListener {
 		case 3:
 			tab3Text.setTextColor(getResources().getColor(
 					R.color.tab_text_selected));
+			tab3Image.setImageResource(R.drawable.tab3_selected);
 			if (lostItemListFragment == null) {
 				lostItemListFragment = ItemListFragment.newInstance(
 						ItemListFragment.ITEM_LIST_TYPE.LOST.toString(), "");
@@ -128,6 +131,7 @@ public class MainActivity extends Activity implements OnClickListener {
 		case 4:
 			tab4Text.setTextColor(getResources().getColor(
 					R.color.tab_text_selected));
+			tab4Image.setImageResource(R.drawable.tab4_selected);
 			if (userItemListFragment == null) {
 				userItemListFragment = ItemListFragment.newInstance(
 						ItemListFragment.ITEM_LIST_TYPE.User.toString(), "");
@@ -148,6 +152,11 @@ public class MainActivity extends Activity implements OnClickListener {
 		tab2Text.setTextColor(getResources().getColor(R.color.tab_text));
 		tab3Text.setTextColor(getResources().getColor(R.color.tab_text));
 		tab4Text.setTextColor(getResources().getColor(R.color.tab_text));
+		
+		tab1Image.setImageResource(R.drawable.tab1_selected);
+		tab2Image.setImageResource(R.drawable.tab2_selected);
+		tab3Image.setImageResource(R.drawable.tab3_selected);
+		tab4Image.setImageResource(R.drawable.tab4_selected);
 	}
 
 	/*

@@ -1,7 +1,8 @@
 <LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
     android:layout_width="match_parent"
     android:layout_height="fill_parent"
-    android:orientation="vertical" >
+    android:orientation="vertical"
+     >
 
     <FrameLayout
         android:id="@+id/content"
@@ -31,7 +32,8 @@
                     android:id="@+id/tab1_image"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
-                    android:layout_gravity="center_horizontal" />
+                    android:layout_gravity="center_horizontal"
+                    android:src="@drawable/tab1" />
 
                 <TextView
                     android:id="@+id/tab1_text"
@@ -59,7 +61,8 @@
                     android:id="@+id/tab2_image"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
-                    android:layout_gravity="center_horizontal" />
+                    android:layout_gravity="center_horizontal"
+                    android:src="@drawable/tab2" />
 
                 <TextView
                     android:id="@+id/tab2_text"
@@ -87,7 +90,8 @@
                     android:id="@+id/tab3_image"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
-                    android:layout_gravity="center_horizontal" />
+                    android:layout_gravity="center_horizontal"
+                    android:src="@drawable/tab3" />
 
                 <TextView
                     android:id="@+id/tab3_text"
@@ -115,7 +119,8 @@
                     android:id="@+id/tab4_image"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
-                    android:layout_gravity="center_horizontal" />
+                    android:layout_gravity="center_horizontal"
+                    android:src="@drawable/tab4" />
 
                 <TextView
                     android:id="@+id/tab4_text"

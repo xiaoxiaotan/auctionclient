@@ -67,7 +67,8 @@ public class KindFragment extends ListFragment {
 			@Override
 			public void onClick(View source) {
 				// 打开添加分类的窗体
-				ShowAddKindView(source.getContext());
+				//ShowAddKindView(source.getContext());
+				LogUtil.addLog("Test","SQLiteDatabase");
 			}
 		});
 
