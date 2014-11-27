@@ -37,8 +37,10 @@ public class HttpUtil {
 	public static final String URL_KIND_LIST = "GetKindList";
 	// 添加分类
 	public static final String URL_KIND_ADD = "AddKind";
+	// 添加物品
+	public static final String URL_ITEM_ADD = "AddItem";
 	// 获取分类下的物品
-	public static final String  URL_LIST_ITEM_LOST = "GetLostItemList";
+	public static final String URL_LIST_ITEM_LOST = "GetLostItemList";
 	// 获取分类下的物品
 	public static final String URL_LIST_ITEM_KIND = "GetKindItemList";
 	// 获取竞拍热门物品
@@ -99,18 +101,21 @@ public class HttpUtil {
 					public String call() throws Exception {
 						// 创建HttpPost对象
 						HttpPost post = new HttpPost(generateUrl(url));
-						// 组装POST的带的数据
-						List<NameValuePair> postParams = new ArrayList<NameValuePair>();
-						for (String key : params.keySet()) {
-							postParams.add(new BasicNameValuePair(key, params
-									.get(key)));
+						if (params != null) {
+							// 组装POST的带的数据
+							List<NameValuePair> postParams = new ArrayList<NameValuePair>();
+							for (String key : params.keySet()) {
+								postParams.add(new BasicNameValuePair(key,
+										params.get(key)));
+							}
+							// TO Do ,get uid from sharedpreference
+							if (!params.containsKey("uid")) {
+								postParams.add(new BasicNameValuePair("uid",
+										"1"));
+							}
+							post.setEntity(new UrlEncodedFormEntity(postParams,
+									"utf-8"));
 						}
-						//TO Do ,get uid from sharedpreference
-						if(!params.containsKey("uid")){
-							postParams.add(new BasicNameValuePair("uid","1"));
-						}
-						post.setEntity(new UrlEncodedFormEntity(postParams,
-								"utf-8"));
 
 						// 发送Post请求，并获取返回的数据
 						HttpResponse response = httpClient.execute(post);
@@ -141,13 +146,15 @@ public class HttpUtil {
 			return URL_BASE + url;
 		}
 	}
+
 	/*
 	 * 添加所有接口都需要传的公共参数，比如uid，devicenum等
 	 */
-	private static Map<String,String> addCommonParams(Map<String,String> params){
-		//uid
-		params.put("uid",SharedPrefUtil.getPref(SharedPrefUtil.USER_ID));
-		//设备信息
+	private static Map<String, String> addCommonParams(
+			Map<String, String> params) {
+		// uid
+		params.put("uid", SharedPrefUtil.getPref(SharedPrefUtil.USER_ID));
+		// 设备信息
 		params.put("device", DeviceUtil.getDeviceInfo());
 		return params;
 	}

@@ -12,6 +12,14 @@ import android.content.Context;
  *
  */
 public class DialogUtil {
+	
+	/*
+	 * 使用全局的Context
+	 */
+	public static void showDialog(String msg)
+	{
+		showDialog(MyApplication.getContext(),msg);
+	}
 	/*
 	 * 弹出提示框，只有确定按钮
 	 */

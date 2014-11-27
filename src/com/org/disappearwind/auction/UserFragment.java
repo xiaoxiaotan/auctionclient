@@ -15,12 +15,14 @@ import android.app.FragmentTransaction;
 import android.app.ListFragment;
 import android.content.Context;
 import android.content.DialogInterface;
+import android.content.Intent;
 import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.EditText;
 import android.widget.ListView;
+import android.widget.Toast;
 
 /**
  * A simple {@link Fragment} subclass.
@@ -55,33 +57,49 @@ public class UserFragment extends ListFragment {
 		super.onListItemClick(l, v, position, id);
 		switch (position) {
 		case 0: // 添加分类
-			ShowAddKindView(l.getContext());
+			showAddKindView(l.getContext());
 			break;
 		case 1: // 添加物品
+			ItemAddFragment itemAddFragment = ItemAddFragment.newInstance();
+			showFragment(itemAddFragment);
 			break;
 		case 2: // 查看自己的物品
 			ItemListFragment itemListFragment = ItemListFragment.newInstance(
 					ItemListFragment.ITEM_LIST_TYPE.USER.toString(), null);
 			itemListFragment.AllowBid =false;
-			FragmentTransaction transaction = getActivity()
-					.getFragmentManager().beginTransaction();
-			transaction.replace(containerId, itemListFragment, getTag());
-			transaction.addToBackStack(getTag());
-			transaction.commit();
+			showFragment(itemListFragment);
 			break;
 		case 3: // 查看参与竞拍的物品
+			showInProcessMsg();
 			break;
 		case 4: // 查看竞得的物品
+			showInProcessMsg();
 			break;
-		case 5: // 关于
+		case 5: // 关于·····················
+			showInProcessMsg();
 			break;
 		}
+	}
+	/*
+	 * 弹出还未开发的提示
+	 */
+	private void showInProcessMsg(){
+		Toast.makeText(getActivity(), "功能正在开发，还未上线！敬请期待！",Toast.LENGTH_SHORT).show();
+	}
+	/*
+	 * 打开Fragment
+	 */
+	private void showFragment(Fragment fragment){
+		FragmentTransaction transaction = getFragmentManager().beginTransaction();
+		transaction.replace(containerId, fragment, getTag());
+		transaction.addToBackStack(getTag());
+		transaction.commit();
 	}
 
 	/*
 	 * 添加分类的窗体
 	 */
-	private void ShowAddKindView(Context ctx) {
+	private void showAddKindView(Context ctx) {
 		// 采用弹出形式
 		final AlertDialog.Builder addKindBuilder = new AlertDialog.Builder(ctx);
 		addKindBuilder.setTitle(R.string.add_kind);

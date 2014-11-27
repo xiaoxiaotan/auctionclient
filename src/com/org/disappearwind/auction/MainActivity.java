@@ -113,7 +113,8 @@ public class MainActivity extends Activity implements OnClickListener {
 						ItemListFragment.ITEM_LIST_TYPE.HOT.toString(), "");
 				transaction.add(R.id.content, hotItemListFragment, "tab2");
 			} else {
-				transaction.show(hotItemListFragment);
+				transaction
+				.show(getFragmentManager().findFragmentByTag("tab2"));
 			}
 			break;
 		case 3:
@@ -125,7 +126,8 @@ public class MainActivity extends Activity implements OnClickListener {
 						ItemListFragment.ITEM_LIST_TYPE.LOST.toString(), "");
 				transaction.add(R.id.content, lostItemListFragment, "tab3");
 			} else {
-				transaction.show(lostItemListFragment);
+				transaction
+				.show(getFragmentManager().findFragmentByTag("tab3"));
 			}
 			break;
 		case 4:

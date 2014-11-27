@@ -1,10 +1,10 @@
 <?xml version="1.0" encoding="utf-8"?>
 <resources xmlns:android="http://schemas.android.com/apk/res/android">
 
-    <string name="app_name">网络竞拍平台</string>
+    <string name="app_name">吾拍</string>
     <string name="hello_world">Hello world!</string>
     <string name="action_settings">Settings</string>
-    <string name="welcome">欢迎登陆网络竞拍平台</string>
+    <string name="welcome">欢迎登陆吾拍网络竞拍平台</string>
     <string name="user_name">用户名：</string>
     <string name="user_pwd">密码：</string>
     <string name="login">登录</string>
@@ -28,6 +28,6 @@
     <string name="main_tab2_title">热门</string>
     <string name="main_tab3_title">流拍</string>
     <string name="main_tab4_title">个人</string>
-    <string name="hello_blank_fragment">Hello blank fragment</string>
+    <string name="btn_add">添加</string>
 
 </resources>
