@@ -16,6 +16,7 @@ import org.apache.http.impl.client.DefaultHttpClient;
 import org.apache.http.message.BasicNameValuePair;
 import org.apache.http.util.EntityUtils;
 
+import android.os.StrictMode;
 import android.util.Log;
 
 /**
@@ -53,34 +54,27 @@ public class HttpUtil {
 	public static final String URL_BID_ADD = "AddBid";
 
 	/**
-	 * 请求服务器地址并返回结果
+	 * 请求服务器地址并返回结果,强制同步方式，慎用！可能阻塞UI
 	 * 
 	 * @param url
 	 *            请求的地址
 	 * @return
 	 * @throws Exception
 	 */
-	private static String getRequest(final String url) throws Exception {
-		FutureTask<String> task = new FutureTask<String>(
-				new Callable<String>() {
-					@Override
-					public String call() throws Exception {
-						// 创建HttpGet对象
-						HttpGet get = new HttpGet(generateUrl(url));
-						// 发送Get请求，并获取返回的数据
-						HttpResponse response = httpClient.execute(get);
-						// 请求成功返回请求的数据，否则返回空
-						if (response.getStatusLine().getStatusCode() == 200) {
-							return EntityUtils.toString(response.getEntity());
-						} else {
-							Log.e("HttpUtil.postRequest", response
-									.getStatusLine().getReasonPhrase());
-							return response.getStatusLine().getReasonPhrase();
-						}
-					}
-				});
-		new Thread(task).start();
-		return task.get();
+	public static String getRequest(final String url) throws Exception {
+		HttpGet get = new HttpGet(generateUrl(url));
+		//强制同步执行，等待网络请求结束
+		StrictMode.setThreadPolicy(new StrictMode.ThreadPolicy.Builder().detectNetwork().build());
+		// 发送Get请求，并获取返回的数据
+		HttpResponse response = httpClient.execute(get);
+		// 请求成功返回请求的数据，否则返回空
+		if (response.getStatusLine().getStatusCode() == 200) {
+			return EntityUtils.toString(response.getEntity());
+		} else {
+			Log.e("HttpUtil.getRequest", response
+					.getStatusLine().getReasonPhrase());
+			return response.getStatusLine().getReasonPhrase();
+		}
 	}
 
 	/**
